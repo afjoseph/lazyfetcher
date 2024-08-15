@@ -93,3 +93,10 @@ func (lf *LazyFetcher[T]) Fetch(
 	})
 	return newValues, newHighestPriorityIdx, nil
 }
+
+func (lf *LazyFetcher[T]) Clear() {
+	lf.entries.Range(func(key, value any) bool {
+		lf.entries.Delete(key)
+		return true
+	})
+}
